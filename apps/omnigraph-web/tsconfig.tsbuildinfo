@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/main.tsx","./src/components/dataworkbench.tsx","./src/components/graphcanvas.tsx","./src/components/nodeinspector.tsx","./src/components/queryworkbench.tsx","./src/lib/mockdata.ts"],"version":"5.9.3"}

@@ -1,0 +1,133 @@
+enum ArtifactKind {
+  UNKNOWN
+  EXCEL
+  PDF
+  IMAGE
+  LOG
+  CODE
+}
+
+enum KnowledgeEntityType {
+  USER
+  TRANSACTION
+  POLICY
+  SERVICE
+  EVENT
+  DOCUMENT
+  METRIC
+  FUNCTION
+  TABLE
+  ALERT
+}
+
+enum RiskLevel {
+  NONE
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+type PropertyEntryResponse {
+  key: String!
+  value: String!
+}
+
+type KnowledgeNodeResponse {
+  id: String!
+  type: String!
+  displayName: String!
+  externalId: String!
+  riskLevel: String!
+  validFromUtc: DateTime!
+  validToUtc: DateTime
+  revision: Long!
+  properties: [PropertyEntryResponse!]!
+}
+
+type KnowledgeEdgeResponse {
+  id: String!
+  fromEntityId: String!
+  toEntityId: String!
+  type: String!
+  confidence: Float!
+  explanation: String!
+  validFromUtc: DateTime!
+  validToUtc: DateTime
+  revision: Long!
+}
+
+type GraphQueryResponse {
+  plannedQuery: String
+  nodes: [KnowledgeNodeResponse!]!
+  relationships: [KnowledgeEdgeResponse!]!
+}
+
+type NaturalLanguageQueryResponse {
+  intent: String!
+  structuredFilter: String!
+  result: GraphQueryResponse!
+}
+
+type SourceEvidenceResponse {
+  artifactId: String!
+  section: String!
+  snippet: String!
+  extractionRule: String!
+}
+
+type ExplainRelationshipResponse {
+  relationshipId: String!
+  explanation: String!
+  sourceArtifactId: String!
+  sourceArtifactUri: String!
+  evidence: [SourceEvidenceResponse!]!
+}
+
+type ImpactAnalysisResponse {
+  rootEntityId: String!
+  summary: String!
+  affectedEntities: [KnowledgeNodeResponse!]!
+  traversedRelationships: [KnowledgeEdgeResponse!]!
+}
+
+type IngestionJobResponse {
+  jobId: String!
+  correlationId: String!
+  status: String!
+  submittedAtUtc: DateTime!
+  artifactKind: String!
+  artifactUri: String!
+}
+
+input MetadataEntryInput {
+  key: String!
+  value: String!
+}
+
+input SubmitIngestionInput {
+  artifactUri: String!
+  artifactKind: ArtifactKind!
+  requestedBy: String!
+  correlationId: String
+  metadata: [MetadataEntryInput!]
+}
+
+type Query {
+  entity(entityId: String!): KnowledgeNodeResponse
+  search(
+    entityType: KnowledgeEntityType
+    minimumRisk: RiskLevel
+    text: String
+    relatedToPolicy: String
+    depth: Int = 2
+    limit: Int = 25
+  ): GraphQueryResponse!
+  naturalLanguage(input: String!): NaturalLanguageQueryResponse!
+  impact(entityId: String!, depth: Int = 3): ImpactAnalysisResponse!
+  explainRelationship(relationshipId: String!): ExplainRelationshipResponse
+}
+
+type Mutation {
+  submitIngestion(input: SubmitIngestionInput!): IngestionJobResponse!
+}

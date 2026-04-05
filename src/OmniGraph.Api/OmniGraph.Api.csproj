@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HotChocolate.AspNetCore" Version="15.1.13" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OmniGraph.Application\OmniGraph.Application.csproj" />
+    <ProjectReference Include="..\OmniGraph.Contracts\OmniGraph.Contracts.csproj" />
+    <ProjectReference Include="..\OmniGraph.Infrastructure\OmniGraph.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

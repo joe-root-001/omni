@@ -1,0 +1,14 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/OmniGraph.Api/OmniGraph.Api.csproj" />
+    <Project Path="src/OmniGraph.Application/OmniGraph.Application.csproj" />
+    <Project Path="src/OmniGraph.Contracts/OmniGraph.Contracts.csproj" />
+    <Project Path="src/OmniGraph.Domain/OmniGraph.Domain.csproj" />
+    <Project Path="src/OmniGraph.Infrastructure/OmniGraph.Infrastructure.csproj" />
+    <Project Path="src/OmniGraph.Ingestion.Worker/OmniGraph.Ingestion.Worker.csproj" />
+    <Project Path="src/OmniGraph.Processing.Worker/OmniGraph.Processing.Worker.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/OmniGraph.ArchitectureTests/OmniGraph.ArchitectureTests.csproj" />
+  </Folder>
+</Solution>

@@ -1,0 +1,347 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@400;500;700&display=swap");
+
+:root {
+  color-scheme: dark;
+  --bg: #08111a;
+  --bg-accent: #0f1d2b;
+  --panel: rgba(15, 29, 43, 0.84);
+  --panel-border: rgba(149, 183, 201, 0.18);
+  --text: #f2f5f7;
+  --muted: #97a5af;
+  --lime: #d9ff6a;
+  --coral: #ff8b6b;
+  --teal: #79f2d0;
+  --line: rgba(215, 223, 228, 0.14);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(121, 242, 208, 0.14), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(255, 139, 107, 0.18), transparent 24%),
+    linear-gradient(180deg, #071019, #091520 48%, #08111a);
+  color: var(--text);
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+button,
+textarea,
+input {
+  font: inherit;
+}
+
+.app-shell {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 32px 20px 48px;
+}
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 28px;
+  margin-bottom: 24px;
+  border: 1px solid var(--panel-border);
+  border-radius: 28px;
+  background: linear-gradient(135deg, rgba(15, 29, 43, 0.95), rgba(13, 25, 38, 0.72));
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+}
+
+.hero h1,
+.panel h2 {
+  margin: 0;
+  font-family: "Space Grotesk", sans-serif;
+  letter-spacing: -0.04em;
+}
+
+.hero h1 {
+  max-width: 720px;
+  font-size: clamp(2.2rem, 5vw, 4.3rem);
+}
+
+.hero-copy {
+  max-width: 700px;
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.hero-stats {
+  display: grid;
+  gap: 14px;
+  min-width: 230px;
+}
+
+.hero-stats div,
+.metric-card {
+  padding: 16px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.hero-stats span,
+.metric-card span,
+.muted {
+  color: var(--muted);
+}
+
+.hero-stats strong,
+.metric-card strong {
+  display: block;
+  margin-top: 8px;
+  font-size: 1.15rem;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 2fr 1.1fr;
+  gap: 20px;
+}
+
+.panel {
+  border: 1px solid var(--panel-border);
+  border-radius: 24px;
+  background: var(--panel);
+  backdrop-filter: blur(14px);
+  padding: 22px;
+}
+
+.data-panel {
+  grid-column: 1 / -1;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: start;
+  margin-bottom: 18px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: var(--lime);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.query-input {
+  width: 100%;
+  min-height: 120px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 16px;
+  color: var(--text);
+  background: rgba(8, 17, 26, 0.82);
+  resize: vertical;
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.chip {
+  border: none;
+  border-radius: 999px;
+  padding: 10px 14px;
+  background: rgba(217, 255, 106, 0.12);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.planner-card {
+  margin-top: 18px;
+  padding: 16px;
+  border-radius: 18px;
+  background: rgba(0, 0, 0, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.planner-card code {
+  display: block;
+  margin-top: 8px;
+  color: var(--teal);
+  white-space: pre-wrap;
+}
+
+.graph-panel {
+  min-height: 560px;
+}
+
+.graph-svg {
+  width: 100%;
+  min-height: 460px;
+}
+
+.graph-edge {
+  stroke: rgba(215, 223, 228, 0.26);
+  stroke-width: 2;
+}
+
+.graph-edge-label {
+  fill: var(--muted);
+  font-size: 11px;
+  text-anchor: middle;
+}
+
+.graph-node {
+  cursor: pointer;
+  stroke: rgba(255, 255, 255, 0.14);
+  stroke-width: 2;
+  transition: transform 160ms ease, filter 160ms ease;
+}
+
+.graph-node.selected {
+  filter: drop-shadow(0 0 18px rgba(217, 255, 106, 0.26));
+}
+
+.graph-node-policy {
+  fill: rgba(217, 255, 106, 0.24);
+}
+
+.graph-node-transaction {
+  fill: rgba(255, 139, 107, 0.26);
+}
+
+.graph-node-event {
+  fill: rgba(121, 242, 208, 0.22);
+}
+
+.graph-node-service,
+.graph-node-function,
+.graph-node-user {
+  fill: rgba(255, 255, 255, 0.09);
+}
+
+.graph-node-label {
+  fill: var(--text);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.risk-pill {
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 0.84rem;
+}
+
+.risk-critical {
+  background: rgba(255, 139, 107, 0.18);
+  color: var(--coral);
+}
+
+.risk-high {
+  background: rgba(217, 255, 106, 0.14);
+  color: var(--lime);
+}
+
+.risk-medium {
+  background: rgba(121, 242, 208, 0.14);
+  color: var(--teal);
+}
+
+.inspector-block + .inspector-block {
+  margin-top: 18px;
+}
+
+.property-list,
+.connection-list {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+  display: grid;
+  gap: 10px;
+}
+
+.property-list li,
+.connection-list li {
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.property-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.connection-list span {
+  display: block;
+  margin-top: 6px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table th,
+.data-table td {
+  padding: 14px 12px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+}
+
+.data-table th {
+  color: var(--muted);
+  font-weight: 500;
+}
+
+@media (max-width: 1100px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    flex-direction: column;
+  }
+
+  .metric-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .app-shell {
+    padding: 18px 14px 28px;
+  }
+
+  .panel,
+  .hero {
+    padding: 18px;
+    border-radius: 20px;
+  }
+
+  .metric-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .data-table {
+    display: block;
+    overflow-x: auto;
+  }
+}

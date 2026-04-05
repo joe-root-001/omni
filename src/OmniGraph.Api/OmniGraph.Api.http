@@ -1,0 +1,53 @@
+@OmniGraph.Api_HostAddress = http://localhost:5000
+
+POST {{OmniGraph.Api_HostAddress}}/api/uploads
+Content-Type: multipart/form-data; boundary=OmniGraphBoundary
+
+--OmniGraphBoundary
+Content-Disposition: form-data; name="RequestedBy"
+
+architect@omnigraph.ai
+--OmniGraphBoundary
+Content-Disposition: form-data; name="File"; filename="policy-x.pdf"
+Content-Type: application/pdf
+
+< ./samples/policy-x.pdf
+--OmniGraphBoundary--
+
+###
+
+POST {{OmniGraph.Api_HostAddress}}/api/ingestion/jobs
+Content-Type: application/json
+
+{
+  "artifactUri": "s3://omnigraph/raw/policies/policy-x-v3.pdf",
+  "artifactKind": "Pdf",
+  "requestedBy": "architect@omnigraph.ai",
+  "metadata": {
+    "owner": "compliance"
+  }
+}
+
+###
+
+POST {{OmniGraph.Api_HostAddress}}/api/query/natural-language
+Content-Type: application/json
+
+{
+  "input": "Show risky transactions related to policy X"
+}
+
+###
+
+GET {{OmniGraph.Api_HostAddress}}/api/graph/entities/policy-x
+Accept: application/json
+
+###
+
+POST {{OmniGraph.Api_HostAddress}}/api/graph/impact
+Content-Type: application/json
+
+{
+  "entityId": "policy-x",
+  "depth": 3
+}
